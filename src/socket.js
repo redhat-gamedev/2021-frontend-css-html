@@ -10,7 +10,7 @@ let retryTimeout;
 
 function connect() {
   if (window.location.hostname.includes('localhost')) {
-    socket = new WebSocket("ws://localhost:3000/game");
+    socket = new WebSocket("ws://localhost:8181/game");
   } else {
     const host = window.location.hostname.replace('game-frontend', 'game-server-frontend');
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
