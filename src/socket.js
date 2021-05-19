@@ -9,8 +9,10 @@ let numRetries = 0;
 let retryTimeout;
 
 function connect() {
-  if (window.location.hostname.includes('localhost')) {
-    socket = new WebSocket("ws://localhost:8181/game");
+  const { hostname } = window.location
+
+  if (hostname.includes('localhost') || hostname.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+    socket = new WebSocket(`ws://${hostname}:8181/game`);
   } else {
     const host = window.location.hostname.replace('shipwars-client-', 'shipwars-game-server-');
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
