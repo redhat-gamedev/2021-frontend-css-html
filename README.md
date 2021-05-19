@@ -22,11 +22,11 @@ export IMAGE_REPOSITORY=quay.io/$QUAY_USER/shipwars-client
 ./scripts/build.sh
 ```
 
-Run the image using the following command. You can visit http://localhost:8080
+Run the image using the following command. You can visit http://localhost:8484
 to play the game, if you have the game server running on http://localhost:8181.
 
 ```bash
-docker run --rm -p 8080:8080 quay.io/$QUAY_USER/shipwars-client:latest
+docker run --rm -p 8484:8484 quay.io/$QUAY_USER/shipwars-client:latest
 ```
 
 Push to quay.io using this command:
