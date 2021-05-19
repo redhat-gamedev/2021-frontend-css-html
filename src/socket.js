@@ -8,16 +8,28 @@ const MAX_RETRIES = 50;
 let numRetries = 0;
 let retryTimeout;
 
-function connect() {
-  const { hostname } = window.location
+/**
+ * Yes, this is a hacky mess to deal with different environments.
+ */
+function getWsUrl () {
+  const { href, hostname, protocol: httpProtocol } = window.location
+  const wsProtocol = httpProtocol === 'http:' ? 'ws:' : 'wss:'
 
-  if (hostname.includes('localhost') || hostname.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
-    socket = new WebSocket(`ws://${hostname}:8181/game`);
+  if (hostname.includes('arcade.redhat.com')) {
+    // Running on arcade.redhat.com, URL is should include subpath, e.g:
+    // wss://arcade.redhat.com/shipwars/game
+    return href.replace(httpProtocol, wsProtocol) + 'game';
+  } else if (hostname.includes('localhost') || hostname.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+    // Developing on localhost or local network IP
+    return `${wsProtocol}//${hostname}:8181/game`;
   } else {
-    const host = window.location.hostname.replace('shipwars-client-', 'shipwars-game-server-');
-    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    socket = new WebSocket(`${protocol}//${host}/game`);
+    // Going directly to the server route on OpenShift
+    return `${wsProtocol}${hostname.replace('shipwars-client-', 'shipwars-game-server-')}/game`;
   }
+}
+
+function connect() {
+  socket = new WebSocket(getWsUrl())
 
   socket.onopen = event => {
     numRetries = 0;
