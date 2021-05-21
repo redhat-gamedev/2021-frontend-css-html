@@ -21,10 +21,10 @@ function getWsUrl () {
     return href.replace(httpProtocol, wsProtocol) + 'game';
   } else if (hostname.includes('localhost') || hostname.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
     // Developing on localhost or local network IP
-    return `${wsProtocol}//${hostname}:8181/game`;
+    return `${wsProtocol}//${hostname}:8181/shipwars/game`;
   } else {
     // Going directly to the server route on OpenShift
-    return `${wsProtocol}${hostname.replace('shipwars-client-', 'shipwars-game-server-')}/game`;
+    return `${wsProtocol}${hostname.replace('shipwars-client-', 'shipwars-game-server-')}/shipwars/game`;
   }
 }
 

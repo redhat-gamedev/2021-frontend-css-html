@@ -8,6 +8,11 @@ React application served using NGINX. Connects to the Shipwars WebSocket server.
 - Yarn v1.x
 - Source-to-Image v1.1.13 or newer
 
+## Notes on Serving
+
+* Game is served from the `/shipwars` path on NGINX.
+* The `PUBLIC_URL=/shipwars` variable is required by `create-react-app` to facilitate this.
+
 ## Build, Run, and Push
 
 Use the included script to invoke Source-to-Image:
