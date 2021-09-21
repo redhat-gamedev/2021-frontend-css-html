@@ -257,7 +257,7 @@ function Battleship({ game, board, player, opponent, boardLocked, attack, match,
       case "Carrier":
         ship = destroyed ? carrierHit : carrier;
         break;
-    
+
       default:
         break;
     }
@@ -284,6 +284,13 @@ function Battleship({ game, board, player, opponent, boardLocked, attack, match,
     return "Battleship";
   }
 
+  const matchIdEl = (
+    <div className="match-id">
+      <p>Match ID:</p>
+      <p>{match.uuid}</p>
+    </div>
+  )
+
   return (
     <div className={ getBattleshipWrapperClasses() }>
       <div className={ theActiveBoard === "attack" ? "board-container" : "board-container hide" }>
@@ -309,6 +316,7 @@ function Battleship({ game, board, player, opponent, boardLocked, attack, match,
             <span>s</span>
             <span>e</span>
           </div>
+          {matchIdEl}
         </div>
       </div>
       <div className={ theActiveBoard === "ship" ? "board-container" : "board-container hide" }>
@@ -327,6 +335,7 @@ function Battleship({ game, board, player, opponent, boardLocked, attack, match,
             <span>e</span>
           </div>
         </div>
+        {matchIdEl}
       </div>
     </div>
 

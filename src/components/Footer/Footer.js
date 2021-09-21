@@ -57,7 +57,7 @@ function Footer({ player, match, game, result, bonus, theActiveBoard, replay }) 
       case "Carrier":
         setBonusShip(bonusCarrier);
         break;
-    
+
       default:
         break;
     }
@@ -65,7 +65,7 @@ function Footer({ player, match, game, result, bonus, theActiveBoard, replay }) 
     bonusTimeout = setTimeout(() => {
       if (player.uuid === match.state.activePlayer && gameRef.current.state !== "paused") {
         bonus(bonusHitsRef.current);
-        
+
         setTimeout(() => {
           setBonusHits(0);
         }, 100);
@@ -77,9 +77,9 @@ function Footer({ player, match, game, result, bonus, theActiveBoard, replay }) 
     if (match.state.phase !== "bonus") {
       return;
     }
-    
+
     setBonusHits(bonusHits + 1);
-    
+
     setBonusTargetShakeClass("shake");
 
     clearTimeout(bonusTargetShakeTimeout);
@@ -130,7 +130,7 @@ function Footer({ player, match, game, result, bonus, theActiveBoard, replay }) 
     <footer className={ getFooterActionClasses() }>
       <div className="ui-footer-overlay"></div>
       <div className="ui-footer__screen-text-wrap">
-        { !replay && 
+        { !replay &&
           <>
             { player.board && !player.board.valid && match.state.phase === "not-ready" &&
               <span className="ui-footer__screen-text-scroll ui-screen-text">** Position your ships ** ** Position your ships ** ** Position your ships ** ** Position your ships ** ** Position your ships ** ** Position your ships ** </span>
