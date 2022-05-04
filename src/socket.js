@@ -14,8 +14,10 @@ let retryTimeout;
 function getWsUrl () {
   const { href, hostname, protocol: httpProtocol } = window.location
   const wsProtocol = httpProtocol === 'http:' ? 'ws:' : 'wss:'
-
-  if (hostname.includes('arcade.redhat.com')) {
+  console.log(new URL(window.location.toString()).searchParams.get('server'))
+  if (new URL(window.location.toString()).searchParams.get('server')) {
+    return new URL(window.location.toString()).searchParams.get('server')
+  } else if (hostname.includes('arcade.redhat.com')) {
     // Running on arcade.redhat.com, URL is should include subpath, e.g:
     // wss://arcade.redhat.com/shipwars/game
     return href.replace(httpProtocol, wsProtocol) + 'game';
